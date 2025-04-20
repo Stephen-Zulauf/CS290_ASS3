@@ -38,7 +38,24 @@ function deepEqual(val1, val2) {
 
   //check for deep equality if both are objects
   if (typeof val1 === "object" && typeof val2 === "object") {
-    //check if both or one is arrays
+    if (val1 === val2) {
+      return true;
+    }
+    //check if both are arrays
+    if (Array.isArray(val1) && Array.isArray(val2)) {
+      //check if same length
+      if (val1.length !== val2.length) {
+        return false;
+      }
+      //deep comparison on each object in arrays(preserve order)
+      for (let i = 0; i < val1.length; i++) {
+        if (!deepEqual(val1[i], val2[i])) {
+          return false;
+        }
+      }
+      return true;
+    }
+    //if one is array and one is object
     if (Array.isArray(val1) || Array.isArray(val2)) {
       return false;
     }

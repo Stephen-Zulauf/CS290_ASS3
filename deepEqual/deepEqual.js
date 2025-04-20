@@ -14,21 +14,21 @@ function deepEqual(val1, val2) {
   if ((val1 === null) & (val2 === null)) {
     return true;
   }
-  if (val1 === null && val2 != null) {
+  if (val1 === null && val2 !== null) {
     return false;
   }
-  if (val1 != null && val2 === null) {
+  if (val1 !== null && val2 === null) {
     return false;
   }
   //check if one value is a primitive and one is object
-  if (typeof val1 === "object" && typeof val2 != "object") {
+  if (typeof val1 === "object" && typeof val2 !== "object") {
     return false;
   }
-  if (typeof val1 != "object" && typeof val2 === "object") {
+  if (typeof val1 !== "object" && typeof val2 === "object") {
     return false;
   }
   //check for deep equlity if both are primitives
-  if (typeof val1 != "object" && typeof val2 != "object") {
+  if (typeof val1 !== "object" && typeof val2 !== "object") {
     if (val1 === val2) {
       return true;
     } else {
@@ -63,7 +63,7 @@ function deepEqual(val1, val2) {
     const keys1 = Object.keys(val1);
     const keys2 = Object.keys(val2);
 
-    if (keys1 !== keys2) {
+    if (keys1.length !== keys2.length) {
       return false;
     }
 
@@ -72,7 +72,7 @@ function deepEqual(val1, val2) {
       return false;
     }
 
-    //if all others check are good then do recursive comparison on keys in the object
+    //if all other checks are good then do recursive comparison on keys in the object
     for (let key in val1) {
       let equal = deepEqual(val1[key], val2[key]);
       if (!equal) {
